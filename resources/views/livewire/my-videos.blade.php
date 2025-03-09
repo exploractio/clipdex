@@ -17,7 +17,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse($videos as $video)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden" wire:key="{{ $video->id }}">
                             <div class="aspect-w-16 aspect-h-9 relative group">
                                 @if($video->thumbnail_path)
                                     <div x-data="{ 

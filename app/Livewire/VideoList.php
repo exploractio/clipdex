@@ -10,6 +10,21 @@ class VideoList extends Component
 {
     use WithPagination;
 
+    public $selectedVideo = null;
+    public $showModal = false;
+
+    public function showVideo($videoId)
+    {
+        $this->selectedVideo = Video::find($videoId);
+        $this->showModal = true;
+    }
+
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->selectedVideo = null;
+    }
+
     public function render()
     {
         return view('livewire.video-list', [

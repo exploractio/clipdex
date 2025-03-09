@@ -17,7 +17,9 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     @foreach($videos as $video)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden relative group">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden relative group cursor-pointer" 
+                             wire:key="{{ $video->id }}"
+                             wire:click="showVideo({{ $video->id }})">
                             @if($video->thumbnail_path)
                                 <div x-data="{ 
                                     muted: true,
@@ -28,27 +30,23 @@
                                             video.muted = value;
                                         });
                                     }
-                                }">
+                                }"
+                                    @mouseenter="muted = false"
+                                    @mouseleave="muted = true">
                                     <video 
                                         x-ref="videoPlayer"
                                         class="object-cover w-full h-full rounded-lg"
                                         loop
                                         autoplay
-                                        playsinline
-                                        @mouseenter="muted = false"
-                                        @mouseleave="muted = true">
+                                        playsinline>
                                         <source src="{{ Storage::url($video->thumbnail_path) }}" type="video/mp4">
                                     </video>
 
                                     <!-- Ícono del altavoz -->
                                     <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
-                                         @click="muted = !muted">
-                                        <svg x-show="muted" class="w-6 h-6 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2M19 12l2 2m-2-2l-2 2"/>
-                                        </svg>
-                                        <svg x-show="!muted" class="w-6 h-6 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M12 8v8m4.536-11.536a9 9 0 010 15.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
-                                        </svg>
+                                         @click.stop="muted = !muted">
+                                        <flux:icon.speaker-wave x-show="!muted" class="w-6 h-6 text-white drop-shadow-lg" />
+                                        <flux:icon.speaker-x-mark x-show="muted" class="w-6 h-6 text-white drop-shadow-lg" />
                                     </div>
                                 </div>
                             @else
@@ -69,4 +67,54 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    @if($showModal)
+        <div class="fixed inset-0 z-50 overflow-y-auto" 
+             aria-labelledby="modal-title" 
+             role="dialog" 
+             aria-modal="true">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <!-- Fondo oscuro -->
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
+                     wire:click="closeModal"></div>
+
+                <!-- Contenido del modal -->
+                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-7xl sm:w-full">
+                    <div class="absolute top-0 right-0 pt-4 pr-4">
+                        <button type="button" 
+                                wire:click="closeModal"
+                                class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none">
+                            <span class="sr-only">Cerrar</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    @if($selectedVideo)
+                        <div class="p-6">
+                            <div class="mb-8">
+                                <h1 class="text-3xl font-bold mb-4">{{ $selectedVideo->title }}</h1>
+                                <p class="text-gray-600">{{ $selectedVideo->description }}</p>
+                            </div>
+
+                            <div class="aspect-w-16 aspect-h-9 mb-8">
+                                <video class="w-full rounded-lg shadow-lg" controls>
+                                    <source src="{{ Storage::url($selectedVideo->file_path) }}" type="video/mp4">
+                                    Tu navegador no soporta el elemento video.
+                                </video>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-gray-500">
+                                    Subido el {{ $selectedVideo->created_at->format('d/m/Y H:i') }}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
