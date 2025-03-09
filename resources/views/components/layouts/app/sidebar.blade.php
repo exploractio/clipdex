@@ -14,6 +14,8 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="video-camera" :href="route('videos.index')" :current="request()->routeIs('videos.index')" wire:navigate>{{ __('Vídeos') }}</flux:navlist.item>
+                    <flux:navlist.item icon="user" :href="route('my.videos')" :current="request()->routeIs('my.videos')" wire:navigate>{{ __('Mis vídeos') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
