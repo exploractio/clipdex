@@ -49,7 +49,7 @@
                         x-on:livewire-upload-progress="progress = $event.detail.progress"
                     >
                         <label class="block text-gray-700 text-sm font-bold mb-2">
-                            Video
+                            Vídeo
                         </label>
                         
                         <input type="file" 
@@ -112,7 +112,7 @@
                     <div class="flex items-center justify-between">
                         <button type="submit" 
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            Subir Video
+                            Subir Vídeo
                         </button>
                         <a href="{{ route('videos.index') }}" 
                            class="text-gray-600 hover:text-gray-800">

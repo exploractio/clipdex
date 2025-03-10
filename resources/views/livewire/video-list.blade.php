@@ -15,9 +15,9 @@
                     </div>
                 @endif
 
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
                     @foreach($videos as $video)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden relative group cursor-pointer" 
+                        <div class="mb-4 bg-white rounded-lg shadow-md overflow-hidden relative group cursor-pointer" 
                              wire:key="{{ $video->id }}"
                              wire:click="showVideo({{ $video->id }})">
                             @if($video->thumbnail_path)
@@ -33,20 +33,22 @@
                                 }"
                                     @mouseenter="muted = false"
                                     @mouseleave="muted = true">
-                                    <video 
-                                        x-ref="videoPlayer"
-                                        class="object-cover w-full h-full rounded-lg"
-                                        loop
-                                        autoplay
-                                        playsinline>
-                                        <source src="{{ Storage::url($video->thumbnail_path) }}" type="video/mp4">
-                                    </video>
+                                    <div class="relative">
+                                        <video 
+                                            x-ref="videoPlayer"
+                                            class="w-full rounded-lg"
+                                            loop
+                                            autoplay
+                                            playsinline>
+                                            <source src="{{ Storage::url($video->thumbnail_path) }}" type="video/mp4">
+                                        </video>
 
-                                    <!-- Ícono del altavoz -->
-                                    <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
-                                         @click.stop="muted = !muted">
-                                        <flux:icon.speaker-wave x-show="!muted" class="w-6 h-6 text-white drop-shadow-lg" />
-                                        <flux:icon.speaker-x-mark x-show="muted" class="w-6 h-6 text-white drop-shadow-lg" />
+                                        <!-- Ícono del altavoz -->
+                                        <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+                                             @click.stop="muted = !muted">
+                                            <flux:icon.speaker-wave x-show="!muted" class="w-6 h-6 text-white drop-shadow-lg" />
+                                            <flux:icon.speaker-x-mark x-show="muted" class="w-6 h-6 text-white drop-shadow-lg" />
+                                        </div>
                                     </div>
                                 </div>
                             @else

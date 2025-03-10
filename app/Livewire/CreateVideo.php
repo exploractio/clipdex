@@ -61,13 +61,22 @@ class CreateVideo extends Component
 
         $startTimeFormatted = gmdate("H:i:s", $startTime);
 
+        // Obtener dimensiones del video original
+        $ffprobeCommand = "ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 {$fullVideoPath}";
+        $dimensions = exec($ffprobeCommand);
+        list($width, $height) = explode('x', $dimensions);
+
+        // Calcular nuevas dimensiones manteniendo el aspect ratio
+        $maxWidth = 320;
+        $scale = $maxWidth / $width;
+        $newHeight = round($height * $scale / 2) * 2; // Asegurar número par
+
         // Generar video de 3 segundos en baja resolución
         $command = "ffmpeg -ss {$startTimeFormatted} -t 3 -i {$fullVideoPath} " .
-                  "-vf 'scale=320:180:force_original_aspect_ratio=decrease,pad=320:180:(ow-iw)/2:(oh-ih)/2' " . // Forzar dimensiones pares
+                  "-vf 'scale={$maxWidth}:{$newHeight}' " . // Escalar manteniendo aspect ratio
                   "-c:v libx264 " . // Codec H.264
                   "-crf 28 " . // Calidad reducida
                   "-preset ultrafast " . // Codificación rápida
-                //   "-an " . // Sin audio
                   "-movflags +faststart " . // Reproducción más rápida
                   "-y {$fullThumbnailPath}";
         
@@ -104,7 +113,7 @@ class CreateVideo extends Component
             'user_id' => Auth::id()
         ]);
 
-        session()->flash('message', 'Video subido con éxito.');
+        session()->flash('message', 'Vídeo subido con éxito.');
         return redirect()->route('my.videos');
     }
 }
