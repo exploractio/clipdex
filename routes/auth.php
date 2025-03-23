@@ -30,11 +30,3 @@ Route::middleware('auth')->group(function () {
 
 Route::post('logout', App\Livewire\Actions\Logout::class)
     ->name('logout');
-
-Route::get('/home', function () {
-    return redirect()->route('videos.index');
-})->name('home')->middleware('auth');
-
-Route::get('/', function () {
-    return redirect()->route('login');
-})->middleware('guest');
