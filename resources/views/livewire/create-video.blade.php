@@ -2,7 +2,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h2 class="text-2xl font-bold mb-6">Subir Nuevo Video</h2>
+                <h2 class="text-2xl font-bold mb-6">Subir un clip</h2>
 
                 <form wire:submit.prevent="save">
                     <div class="mb-4">
@@ -112,7 +112,7 @@
                     <div class="flex items-center justify-between">
                         <button type="submit" 
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            Subir Vídeo
+                            Subir
                         </button>
                         <a href="{{ route('videos.index') }}" 
                            class="text-gray-600 hover:text-gray-800">
