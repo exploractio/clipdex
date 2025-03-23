@@ -76,7 +76,7 @@
                         </div>
                     @empty
                         <div class="col-span-3 text-center py-8 text-gray-500">
-                            Aún no has subido ningún clip. Hoy es un buen día para a subir tu primer clip.
+                            Aún no has subido ningún clip. Hoy es un buen día para subir tu primer clip.
                         </div>
                     @endforelse
                 </div>
