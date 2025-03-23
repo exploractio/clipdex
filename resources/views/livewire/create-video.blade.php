@@ -2,7 +2,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h2 class="text-2xl font-bold mb-6">Subir Nuevo Video</h2>
+                <h2 class="text-2xl font-bold mb-6">Subir un clip</h2>
 
                 <form wire:submit.prevent="save">
                     <div class="mb-4">
