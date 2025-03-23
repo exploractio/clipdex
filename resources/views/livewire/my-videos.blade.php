@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold">Mis vídeos</h2>
+                    <h2 class="text-2xl font-bold">Mis clips</h2>
                     <a href="{{ route('videos.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Subir un clip
                     </a>
@@ -68,7 +68,7 @@
                                     <span class="text-sm text-gray-500">{{ $video->created_at->diffForHumans() }}</span>
                                     <button wire:click="delete({{ $video->id }})"
                                             class="text-red-500 hover:text-red-700"
-                                            onclick="return confirm('¿Estás seguro?')">
+                                            onclick="return confirm('¿Seguro que quieres eliminar el clip?')">
                                         Eliminar
                                     </button>
                                 </div>
@@ -76,7 +76,7 @@
                         </div>
                     @empty
                         <div class="col-span-3 text-center py-8 text-gray-500">
-                            No tienes videos aún.
+                            Aún no has subido ningún clip. Hoy es un buen día para a subir tu primer clip.
                         </div>
                     @endforelse
                 </div>
