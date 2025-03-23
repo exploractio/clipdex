@@ -36,7 +36,7 @@
                     <flux:menu.separator />
 
                     <flux:menu.item icon="user" href="{{ route('my.videos') }}">
-                        {{ __('Mis vídeos') }}
+                        {{ __('Mis clips') }}
                     </flux:menu.item>
 
                     <flux:menu.separator />
