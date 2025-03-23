@@ -41,13 +41,13 @@
 
                     <flux:menu.separator />
 
-<flux:menu.radio.group x-data variant="segmented" x-model="$flux.appearance">
-    <flux:menu.radio value="light" icon="sun">{{ __('Light') }}</flux:menu.radio>
-    <flux:menu.radio value="dark" icon="moon">{{ __('Dark') }}</flux:menu.radio>
-    <flux:menu.radio value="system" icon="computer-desktop">{{ __('System') }}</flux:menu.radio>
-</flux:menu.radio.group>
+                    <flux:menu.radio.group x-data variant="segmented" x-model="$flux.appearance">
+                        <flux:menu.radio value="light" icon="sun">{{ __('Light') }}</flux:menu.radio>
+                        <flux:menu.radio value="dark" icon="moon">{{ __('Dark') }}</flux:menu.radio>
+                        <flux:menu.radio value="system" icon="computer-desktop">{{ __('System') }}</flux:menu.radio>
+                    </flux:menu.radio.group>
 
-<flux:menu.separator />
+                    <flux:menu.separator />
 
                     <flux:menu.item icon="cog-6-tooth" href="{{ route('settings.profile') }}">
                         {{ __('Configuración') }}
