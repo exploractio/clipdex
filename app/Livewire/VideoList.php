@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Video;
+use Flux\Flux;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,17 +12,16 @@ class VideoList extends Component
     use WithPagination;
 
     public $selectedVideo = null;
-    public $showModal = false;
 
     public function showVideo($videoId)
     {
         $this->selectedVideo = Video::find($videoId);
-        $this->showModal = true;
+        Flux::modal('modal-video')->show();
     }
 
     public function closeModal()
     {
-        $this->showModal = false;
+        Flux::modal('modal-video')->close();
         $this->selectedVideo = null;
     }
 
