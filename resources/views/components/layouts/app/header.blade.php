@@ -8,8 +8,9 @@
         <flux:header container class="bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
-            <flux:brand href="{{ route('videos.index') }}" logo="{{ asset('images/logo.png') }}" name="Clipdex" class="max-lg:hidden dark:hidden" />
-            <flux:brand href="{{ route('videos.index') }}" logo="{{ asset('images/dark-mode-logo.png') }}" name="Clipdex" class="max-lg:hidden! hidden dark:flex" />
+            <a href="{{ route('home') }}" class="ml-2 mr-5 flex items-center space-x-2 lg:ml-0" wire:navigate>
+                <x-app-logo />
+            </a>
 
             <flux:navbar class="-mb-px max-lg:hidden">
                 <flux:separator vertical variant="subtle" class="my-2"/>
